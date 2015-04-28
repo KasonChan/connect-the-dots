@@ -1,0 +1,24 @@
+/**
+ * Created by kasonchan on 4/28/15.
+ */
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: Roboto, sans-serif;
+    -ms-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size: 16px;
+    margin: 0px auto;
+}
+
+button {
+    padding: 10px;
+    font-size: medium;
+    border: none;
+    background-color: #03A9F4;
+    color: #FFFFFF;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+}
