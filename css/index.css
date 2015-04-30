@@ -12,13 +12,57 @@ html, body {
     margin: 0px auto;
 }
 
+#div_solve {
+    position: absolute;
+    bottom: 20px;
+    left: 48%;
+}
+
+#div_reset {
+    position: absolute;
+    bottom: 20px;
+    left: 48%;
+}
+
 button {
     padding: 10px;
     font-size: medium;
     border: none;
-    background-color: #03A9F4;
-    color: #FFFFFF;
+    background-color: #03A9F4; /* Light blue */
+    color: #FFFFFF; /* White */
+}
+
+#playground {
+    border: none;
+    height: 100%;
+    width: 100%;
+    margin: auto;
     position: absolute;
-    bottom: 20px;
-    left: 50%;
+}
+
+#display {
+    display: block;
+    height: 16px;
+    position: absolute;
+    text-align: center;
+    vertical-align: middle;
+    width: 100%;
+    top: 50%;
+    margin-top: -8px;
+}
+
+#log {
+    display: block;
+    position: absolute;
+    top: 220px;
+}
+
+.dot {
+    position: absolute;
+    height: 10px;
+    width: 10px;
+    background-color: #000;
+    border-radius: 5px;
+    float: left;
+    margin: 0 auto;
 }

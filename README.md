@@ -7,14 +7,15 @@ This is a web-based solver for "connect-the-dots".
 The web app should initially render a blank page with a single `Solve` button in
  the bottom center of the page.  Inside the web app, users will be able to take 
  one of two actions:
+ 
 1. They can click on the `Solve` button to solve the current connect-the-dots 
 puzzle.
 2. They can click elsewhere on the page (anywhere outside of the `Solve` button)
  to add an additional dot to the page.
 
-After the game has been solved, the solve button should be replaced by a `Reset`
- button.  When clicked, the reset button should revert the page to its initial 
- state.
+After the game has been solved, the `solve` button should be replaced by a 
+`Reset` button.  When clicked, the reset button should revert the page to its 
+initial state.
 
 See `figures A-D` below for an example iteration of the game.
 

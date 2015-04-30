@@ -14,12 +14,26 @@
   <link rel="stylesheet" type="text/css" media="screen" href="css/index.css">
 
   <!-- Javascript -->
+  <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
   <script type="text/javascript" src="js/index.js"></script>
 
   <title>Connect the dots</title>
 </head>
 <body>
-<button type="button" id="solve">Solve</button>
-<button type="rest" id="reset">Reset</button>
+<div id="playground">
+  <span id="display">Testing</span>
+</div>
+<span id="log"></span>
+
+<div id="div_solve">
+  <button type="button" id="solve" onclick="solve_action()">Solve</button>
+</div>
+
+<div id="div_reset">
+  <button type="reset" id="reset" onclick="reset_action()">Reset</button>
+</div>
+
 </body>
 </html>
