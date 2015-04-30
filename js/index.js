@@ -92,6 +92,7 @@ var min_length =
   (($(window).height() - 0) * ($(window).height() - 0)));
 var next_dot = -1;
 var visited_dots = [];
+var visited_edge = [];
 
 // Draw line from current dot to next dot
 function draw_line(x1, y1, x2, y2) {
@@ -138,11 +139,6 @@ function draw_line(x1, y1, x2, y2) {
   }, 400, "linear", function () {
   });
 
-  //alert("PUSH " + current_dot);
-
-  // Update current dot and visited dots
-  visited_dots.push(next_dot);
-  current_dot = next_dot;
 }
 
 /**
@@ -157,30 +153,67 @@ function solve_action() {
 
   // Create a matrix of distance between two dots
   calculate_matrix();
-  
-  for (i = 0; i < clicks.length; i = i + 1) {
-    if ((matrix[current_dot][i] != 0) &&
-      (matrix[current_dot][i] < min_length) &&
-      (current_dot != next_dot)) {
-      min_length = matrix[current_dot][i];
-      next_dot = i;
 
-      alert(min_length + " " + next_dot);
+  visited_dots.push(current_dot);
+  visited_edge.push(0.00)
+
+  for (x = 0; x < clicks.length - 1; x = x + 1) {
+
+    for (i = 0; i < clicks.length; i = i + 1) {
+      if ((matrix[current_dot][i] != 0)) {
+        if ((current_dot != next_dot)) {
+
+          // If not visited
+          if ((visited_edge.indexOf(min_length) == -1) &&
+            (visited_dots.indexOf(i) == -1)) {
+            if ((matrix[current_dot][i] < min_length)) {
+              min_length = matrix[current_dot][i];
+              next_dot = i;
+
+              //alert("min_length: " + min_length +
+              //", current_dot: " + current_dot +
+              //", next_dot: " + next_dot);
+            }
+          }
+          else {
+            //min_length =
+            //  Math.sqrt((($(window).width() - 0) * ($(window).width() - 0)) +
+            //  (($(window).height() - 0) * ($(window).height() - 0)));
+            //next_dot = -1;
+            //
+            //alert(min_length + " " + next_dot);
+          }
+        }
+
+      }
     }
+
+    draw_line(clicks[current_dot][0],
+      clicks[current_dot][1],
+      clicks[next_dot][0],
+      clicks[next_dot][1]);
+
+    // Update current dot and visited dots
+    visited_dots.push(next_dot);
+    current_dot = next_dot;
+    next_dot = -1;
+    visited_edge.push(min_length);
+
+    // Get the length of the diagonal of the browser
+    min_length =
+      Math.sqrt((($(window).width() - 0) * ($(window).width() - 0)) +
+      (($(window).height() - 0) * ($(window).height() - 0)));
+
+    // alert("current_dot: " + current_dot + ", next_dot: " + next_dot);
+    //alert("visited_dots: " + visited_dots);
+
   }
 
   draw_line(clicks[current_dot][0],
     clicks[current_dot][1],
-    clicks[next_dot][0],
-    clicks[next_dot][1]);
+    clicks[0][0],
+    clicks[0][1]);
 
-  // Get the length of the diagonal of the browser
-  min_length =
-    Math.sqrt((($(window).width() - 0) * ($(window).width() - 0)) +
-    (($(window).height() - 0) * ($(window).height() - 0)));
-
-  alert(current_dot + " " + next_dot);
-  alert(visited_dots);
 
   // Show reset button
   $("#div_reset").show();
