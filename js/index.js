@@ -4,6 +4,23 @@
 
 var clicks = [], updatedClicks = "";
 
+// Matrix related variables
+var matrix = [[]];
+var length = 0;
+
+// Draw line and solve related variables
+var current_dot = 0;
+// Get the length of the diagonal of the browser
+var min_length =
+  Math.sqrt((($(window).width() - 0) * ($(window).width() - 0)) +
+  (($(window).height() - 0) * ($(window).height() - 0)));
+var next_dot = -1;
+var visited_dots = [];
+var visited_edges = [];
+
+/**
+ * When document ready
+ */
 $(document).ready(function () {
   // In the beginning, show the solve button and hide reset button
   $("#div_reset").hide();
@@ -17,18 +34,18 @@ $(document).ready(function () {
     var x = ev.clientX - offset.left;
     var y = ev.clientY - offset.top;
 
-    // Show the coordinates on display
-    $display.text('x: ' + x + ', y: ' + y);
+    //// Show the coordinates on display
+    //$display.text('x: ' + x + ', y: ' + y);
 
     // Add the coordinates to the clicks array
     clicks.push([x, y]);
 
-    // Log the coordinates of the clicks
-    updatedClicks += clicks.length + ":" +
-      " " + clicks[clicks.length - 1] + "<br />";
-
-    // Add the log to the page
-    $('#log').html(updatedClicks);
+    //// Log the coordinates of the clicks
+    //updatedClicks += clicks.length + ":" +
+    //  " " + clicks[clicks.length - 1] + "<br />";
+    //
+    //// Add the log to the page
+    //$('#log').html(updatedClicks);
 
     // Constructs the css of the dot
     css = {
@@ -45,10 +62,9 @@ $(document).ready(function () {
   });
 });
 
-var matrix = [[]];
-var length = 0;
-
-// Calculate the all the length from each dot to every other dots
+/**
+ * Calculate the all the length from each dot to every other dots
+ */
 function calculate_matrix() {
   for (i = 0; i < clicks.length; i = i + 1) {
     matrix[i] = [];
@@ -56,9 +72,10 @@ function calculate_matrix() {
       if (i == j) {
         matrix[i][j] = 0.00.toFixed(2);
 
-        updatedClicks += "[" + i + ", " + j + "]: " + matrix[i][j] + " ";
-        // Add the log to the page
-        $('#log').html(updatedClicks);
+        //// Logging
+        //updatedClicks += "[" + i + ", " + j + "]: " + matrix[i][j] + " ";
+        //// Add the log to the page
+        //$('#log').html(updatedClicks);
       }
       else {
         x1 = clicks[i][0];
@@ -71,30 +88,23 @@ function calculate_matrix() {
 
         matrix[i][j] = length;
 
-        updatedClicks += "[" + i + ", " + j + "]: " + matrix[i][j] + " ";
-        // Add the log to the page
-        $('#log').html(updatedClicks);
+        //// Logging
+        //updatedClicks += "[" + i + ", " + j + "]: " + matrix[i][j] + " ";
+        //// Add the log to the page
+        //$('#log').html(updatedClicks);
       }
     }
 
-    updatedClicks += "<br />";
-    // Add the log to the page
-    $('#log').html(updatedClicks);
+    //// Logging
+    //updatedClicks += "<br />";
+    //// Add the log to the page
+    //$('#log').html(updatedClicks);
   }
-
-  return;
 }
 
-var current_dot = 0;
-// Get the length of the diagonal of the browser
-var min_length =
-  Math.sqrt((($(window).width() - 0) * ($(window).width() - 0)) +
-  (($(window).height() - 0) * ($(window).height() - 0)));
-var next_dot = -1;
-var visited_dots = [];
-var visited_edge = [];
-
-// Draw line from current dot to next dot
+/**
+ * Draw line from current dot (x1, y1) to next dot (x2, y2)
+ */
 function draw_line(x1, y1, x2, y2) {
   // Slope of the segment
   var m = (y2 - y1) / (x2 - x1);
@@ -111,7 +121,7 @@ function draw_line(x1, y1, x2, y2) {
     transform = 180 + angle;
   }
 
-  // Add the (currently invisible) line to the page
+  // Add the line to the page
   var id = 'line_' + new Date().getTime();
   var line = "<div id='" + id + "'class='line'></div>";
   $('body').append(line);
@@ -155,7 +165,7 @@ function solve_action() {
   calculate_matrix();
 
   visited_dots.push(current_dot);
-  visited_edge.push(0.00)
+  visited_edges.push(0.00)
 
   for (x = 0; x < clicks.length - 1; x = x + 1) {
 
@@ -164,7 +174,7 @@ function solve_action() {
         if ((current_dot != next_dot)) {
 
           // If not visited
-          if ((visited_edge.indexOf(min_length) == -1) &&
+          if ((visited_edges.indexOf(min_length) == -1) &&
             (visited_dots.indexOf(i) == -1)) {
             if ((matrix[current_dot][i] < min_length)) {
               min_length = matrix[current_dot][i];
@@ -175,16 +185,7 @@ function solve_action() {
               //", next_dot: " + next_dot);
             }
           }
-          else {
-            //min_length =
-            //  Math.sqrt((($(window).width() - 0) * ($(window).width() - 0)) +
-            //  (($(window).height() - 0) * ($(window).height() - 0)));
-            //next_dot = -1;
-            //
-            //alert(min_length + " " + next_dot);
-          }
         }
-
       }
     }
 
@@ -197,23 +198,22 @@ function solve_action() {
     visited_dots.push(next_dot);
     current_dot = next_dot;
     next_dot = -1;
-    visited_edge.push(min_length);
+    visited_edges.push(min_length);
 
     // Get the length of the diagonal of the browser
     min_length =
       Math.sqrt((($(window).width() - 0) * ($(window).width() - 0)) +
       (($(window).height() - 0) * ($(window).height() - 0)));
 
-    // alert("current_dot: " + current_dot + ", next_dot: " + next_dot);
+    //alert("current_dot: " + current_dot + ", next_dot: " + next_dot);
     //alert("visited_dots: " + visited_dots);
-
+    //alert("visited_edges: " + visited_edges);
   }
 
   draw_line(clicks[current_dot][0],
     clicks[current_dot][1],
     clicks[0][0],
     clicks[0][1]);
-
 
   // Show reset button
   $("#div_reset").show();
