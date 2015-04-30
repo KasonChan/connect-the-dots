@@ -32,18 +32,17 @@ $(document).ready(function () {
 
     // Constructs the css of the dot
     css = {
-      left: clicks[clicks.length - 1][0] - offset.top,
-      top: clicks[clicks.length - 1][1] - offset.left,
+      left: clicks[clicks.length - 1][0],
+      top: clicks[clicks.length - 1][1],
       zIndex: clicks.length - 1
     }
 
     // Construct the html and css for the dot
-    div = $('<div class="dot"></div>').css(css);
+    div = $('<button type="button" class="dot" disabled></button>').css(css);
 
     // Add the dot to the page
-    $('#playground').append(div);
+    $('body').append(div);
   });
-
 });
 
 /**
@@ -63,5 +62,6 @@ function solve_action() {
  * Reset the application
  */
 function reset_action() {
+  // Reload the page to initial
   location.reload();
 }
