@@ -1,4 +1,4 @@
-# Connect-the-Dots (Under construction) #
+# Connect-the-Dots #
  
 This is a web-based solver for "connect-the-dots".
 
