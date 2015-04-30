@@ -52,6 +52,9 @@ function solve_action() {
   // Hide solve button
   $("#div_solve").hide();
 
+  // Make playground unclickable
+  $('#playground').unbind('click');
+
   // Connect the dots
 
   // Show reset button
